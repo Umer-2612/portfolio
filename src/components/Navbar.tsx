@@ -12,9 +12,9 @@ const NavBar = () => {
 
   const menuItems = useMemo(
     () => [
-      { title: "Experience", id: "experience" },
-      { title: "Projects", id: "projects" },
-      { title: "Contact", id: "contact" },
+      { label: "Experience", id: "experience" },
+      { label: "Projects", id: "projects" },
+      { label: "Contact", id: "contact" },
     ],
     []
   );
@@ -58,8 +58,12 @@ const NavBar = () => {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
+      // Get the navbar height
+      const navbar = document.querySelector('nav');
+      const navbarHeight = navbar ? navbar.offsetHeight : 0;
+      
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY;
+      const offsetPosition = elementPosition + window.scrollY - navbarHeight - 20; // Added extra padding
 
       window.scrollTo({
         top: offsetPosition,
@@ -81,69 +85,60 @@ const NavBar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`w-full py-2 transition-all duration-300`}
+      className={`fixed top-0 w-full py-2 transition-all duration-300 z-50`}
     >
-      <div className="mx-auto w-[50%] max-w-4xl">
+      <div className="mx-auto w-[90%] md:w-[50%] max-w-4xl">
         <div
           className={`rounded-xl transition-all duration-300 ${
-            scrolled ? "bg-black/80 backdrop-blur-lg" : "bg-[#27272A]"
-          }`}
+            scrolled ? "bg-black/80 backdrop-blur-lg shadow-lg" : "bg-[#27272A]"
+          } px-4 py-2`}
         >
-          <div className="px-4 py-2">
-            <div className="flex items-center justify-between">
-              {/* Logo and Photo */}
-              <motion.button
-                onClick={scrollToTop}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="flex items-center gap-2 group"
-              >
-                <div className="relative w-8 h-8 rounded-full overflow-hidden border-2 border-primary/80 group-hover:border-primary transition-colors">
-                  <Image
-                    src={photoImg}
-                    alt="Umer Karachiwala"
-                    fill
-                    className="object-cover"
-                    sizes="32px"
-                  />
-                </div>
-                <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary/90 to-purple-500/90 group-hover:from-primary group-hover:to-purple-500 transition-all">
-                  Umer Karachiwala
-                </span>
-              </motion.button>
-
-              {/* Desktop Menu */}
-              <div className="hidden md:flex items-center gap-6">
-                {menuItems.map((item) => (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`relative py-1 text-sm font-medium transition-colors duration-300 ${
-                      activeSection === item.id
-                        ? "text-primary"
-                        : "text-gray-300 hover:text-primary"
-                    }`}
-                  >
-                    {item.title}
-                    {activeSection === item.id && (
-                      <motion.div
-                        layoutId="activeSection"
-                        className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-purple-500"
-                        initial={false}
-                      />
-                    )}
-                  </button>
-                ))}
+          <div className="flex items-center justify-between">
+            {/* Logo and Photo */}
+            <motion.button
+              onClick={scrollToTop}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex items-center gap-2 group"
+            >
+              <div className="relative w-8 h-8 rounded-full overflow-hidden border-2 border-primary/80 group-hover:border-primary transition-colors">
+                <Image
+                  src={photoImg}
+                  alt="Umer Karachiwala"
+                  fill
+                  className="object-cover"
+                  sizes="32px"
+                />
               </div>
+              <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary/90 to-purple-500/90 group-hover:from-primary group-hover:to-purple-500 transition-all">
+                Umer Karachiwala
+              </span>
+            </motion.button>
 
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden text-gray-300 hover:text-primary transition-colors"
-              >
-                {isOpen ? <FiX size={20} /> : <FiMenu size={20} />}
-              </button>
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-6">
+              {menuItems.map((item) => (
+                <motion.button
+                  key={item.id}
+                  className={`text-sm font-medium transition-colors duration-300 ${
+                    activeSection === item.id
+                      ? "text-primary"
+                      : "text-gray-400 hover:text-gray-200"
+                  }`}
+                  onClick={() => scrollToSection(item.id)}
+                >
+                  {item.label}
+                </motion.button>
+              ))}
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden text-gray-300 hover:text-primary transition-colors"
+            >
+              {isOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+            </button>
           </div>
 
           {/* Mobile Menu */}
@@ -154,21 +149,23 @@ const NavBar = () => {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.2 }}
-                className="overflow-hidden"
+                className="md:hidden overflow-hidden"
               >
-                <div className="px-4 py-2 border-t border-gray-700/50">
+                <div className="px-4 py-2 mt-2 space-y-1 border-t border-gray-700/50">
                   {menuItems.map((item) => (
-                    <button
+                    <motion.button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`block w-full text-left px-3 py-2 rounded-lg transition-colors duration-300 ${
+                      className={`block w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${
                         activeSection === item.id
                           ? "bg-primary/10 text-primary"
                           : "text-gray-300 hover:bg-primary/5 hover:text-primary"
                       }`}
+                      whileHover={{ x: 4 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      {item.title}
-                    </button>
+                      {item.label}
+                    </motion.button>
                   ))}
                 </div>
               </motion.div>

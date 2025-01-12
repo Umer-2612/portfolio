@@ -1,19 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import toast, { Toaster } from "react-hot-toast";
 
 const ContactSection = () => {
+  const email = "karachiwalaumer2612@gmail.com";
+
   const handleEmailClick = () => {
-    navigator.clipboard.writeText("umerkarachiwala2612@gmail.com");
-    toast.success("Email copied to clipboard! 📋", {
-      style: {
-        background: "#333",
-        color: "#fff",
-        border: "1px solid #4F46E5",
-      },
-      duration: 2000,
-    });
+    window.location.href = `mailto:${email}`;
   };
 
   const socialLinks = [
@@ -39,7 +32,6 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-20">
-      <Toaster position="bottom-center" />
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold text-center mb-16">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500">
@@ -65,10 +57,15 @@ const ContactSection = () => {
               </p>
               <button
                 onClick={handleEmailClick}
-                className="group flex items-center gap-3 mx-auto bg-primary/10 hover:bg-primary/20 text-primary px-6 py-3 rounded-full transition-all duration-300"
+                className="group inline-flex items-center gap-3 mx-auto bg-primary/10 hover:bg-primary/20 text-primary px-6 py-3 rounded-full transition-all duration-300 max-w-full overflow-hidden relative"
+                title={email}
               >
-                <FaEnvelope className="text-xl group-hover:scale-110 transition-transform" />
-                <span>karachiwalaumer2612@gmail.com</span>
+                <FaEnvelope className="text-xl group-hover:scale-110 transition-transform flex-shrink-0" />
+                <span className="truncate">{email}</span>
+                {/* Tooltip */}
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-gray-900 text-white text-sm rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 whitespace-nowrap">
+                  {email}
+                </div>
               </button>
             </div>
 

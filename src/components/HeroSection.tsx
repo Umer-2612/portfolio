@@ -34,7 +34,7 @@ const HeroSection = () => {
           className="md:w-1/2 text-center md:text-left"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Trust me, I&apos;m Software Engineer
+            Trust me, I&apos;m a Software Engineer
           </h1>
 
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-6">
