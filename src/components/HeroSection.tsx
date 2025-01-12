@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaYoutube } from "react-icons/fa";
 import Image from "next/image";
 import photoImg from "../assets/Me.jpg";
 
@@ -50,14 +52,6 @@ const HeroSection = () => {
               collaborate.
             </p>
           </div>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-          >
-            Contact Me
-          </motion.button>
         </motion.div>
 
         {/* Right Content */}
@@ -79,19 +73,19 @@ const HeroSection = () => {
 
           <div className="flex justify-center gap-8 mt-8">
             <SocialLink
-              href="https://github.com/yourusername"
+              href="https://github.com/Umer-2612"
               icon={<FaGithub size={28} />}
             />
             <SocialLink
-              href="https://linkedin.com/in/yourusername"
+              href="https://www.linkedin.com/in/umer-karachiwala/"
               icon={<FaLinkedin size={28} />}
             />
             <SocialLink
-              href="https://twitter.com/yourusername"
-              icon={<FaTwitter size={28} />}
+              href="https://x.com/UmerKarachiwala"
+              icon={<FaXTwitter size={28} />}
             />
             <SocialLink
-              href="https://youtube.com/yourusername"
+              href="https://www.youtube.com/@UmerKarachiwala2612"
               icon={<FaYoutube size={28} />}
             />
           </div>
