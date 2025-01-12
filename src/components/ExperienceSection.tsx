@@ -132,7 +132,7 @@ const ExperienceSection = () => {
 const experiences = [
   {
     title: "Backend Developer",
-    company: "WebOsmotics",
+    company: "WebOsmotic",
     location: "Gujarat, India",
     duration: "Sep 2023 - Present",
     projectLink: "https://www.narad.io",
