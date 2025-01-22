@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import twitterBannerImg from "../assets/twitterProject.png";
+import cloudeIde from "../assets/image.png";
 import toast, { Toaster } from "react-hot-toast";
+import codemyBannerImg from "../assets/image2.png";
 
 const ProjectsSection = () => {
   const [filter, setFilter] = useState("all");
@@ -17,9 +18,21 @@ const ProjectsSection = () => {
     e.preventDefault();
     toast.success("Project will be live soon! 🚀", {
       style: {
-        background: '#333',
-        color: '#fff',
-        border: '1px solid #4F46E5',
+        background: "#333",
+        color: "#fff",
+        border: "1px solid #4F46E5",
+      },
+      duration: 3000,
+    });
+  };
+
+  const handleDGithubClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    toast.success("Currently in development mode! 🖥️", {
+      style: {
+        background: "#333",
+        color: "#fff",
+        border: "1px solid #4F46E5",
       },
       duration: 3000,
     });
@@ -68,11 +81,12 @@ const ProjectsSection = () => {
                 {/* Project Image */}
                 <div className="relative h-48 overflow-hidden">
                   <Image
-                    src={twitterBannerImg}
+                    src={project.image}
                     alt={project.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                     quality={75}
+                    style={{ objectFit: "cover" }} // Changed to "cover" for filling the space
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
@@ -100,17 +114,14 @@ const ProjectsSection = () => {
                   {/* Links */}
                   <div className="flex gap-4">
                     <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                      onClick={handleDGithubClick}
+                      className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors cursor-pointer"
                     >
                       <FaGithub /> Code
                     </a>
                     <a
-                      href="#"
                       onClick={handleDemoClick}
-                      className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+                      className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors cursor-pointer"
                     >
                       <FaExternalLinkAlt /> Demo
                     </a>
@@ -147,7 +158,8 @@ const projects = [
       "AWS",
       "Tailwind CSS",
     ],
-    github: "#",
+    image: codemyBannerImg,
+    github: "https://github.com/Umer-2612",
     demo: "#",
   },
   {
@@ -166,7 +178,8 @@ const projects = [
       "Code Server Packages",
       "AWS",
     ],
-    github: "#",
+    image: cloudeIde,
+    github: "https://github.com/Umer-2612",
     demo: "#",
   },
 ];
