@@ -13,13 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Umer Karachiwala | Software Engineer",
-  description: "Full-stack developer specializing in modern web applications. Experienced in React, Node.js, and cloud technologies.",
-  keywords: ["Software Engineer", "Full Stack Developer", "React Developer", "Node.js Developer"],
+  title: "Umer Karachiwala | Backend & DevOps Engineer",
+  description: "Backend and DevOps Engineer specializing in scalable systems, cloud technologies, and AI-driven automation. Experienced in AWS, Docker, and Node.js.",
+  keywords: ["Backend Engineer", "DevOps Engineer", "Cloud Technologies", "AWS", "Docker", "Node.js"],
   authors: [{ name: "Umer Karachiwala" }],
   openGraph: {
-    title: "Umer Karachiwala | Software Engineer",
-    description: "Full-stack developer specializing in modern web applications",
+    title: "Umer Karachiwala | Backend & DevOps Engineer",
+    description: "Backend and DevOps Engineer specializing in scalable systems and cloud technologies",
     type: "website",
   },
 };
