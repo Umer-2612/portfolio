@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": {
+        "framework": "vite",
+        "includeFiles": [
+          "src/**",
+          "public/**",
+          "index.html",
+          "vite.config.ts",
+          "tailwind.config.ts",
+          "postcss.config.js"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
+}
